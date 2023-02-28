@@ -1,0 +1,307 @@
+<!-- wp:html -->
+<p id="table"></p>
+<!-- /wp:html -->
+
+<!-- wp:flexible-table-block/table {"className":"is-style-stripes"} -->
+<figure class="wp-block-flexible-table-block-table is-style-stripes"><table class="has-fixed-layout"><tbody><tr><td><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-bright-blue-color"><span class="bold-blue">Original Array</span></mark></td><td><strong>Changed</strong></td><td><strong>Not changed</strong></td></tr><tr><td><strong>return new array </strong></td><td><a href="#length" data-type="internal" data-id="#length">length<br>reverse()<br>splice()<br>sort()</a></td><td><a href="#concat" data-type="internal" data-id="#concat">concat()<br>slice()<br>map()<br>filter()</a></td></tr><tr><td><strong>return array item</strong>(s)</td><td><a href="#pop" data-type="internal" data-id="#pop">pop()<br>shift()</a></td><td></td></tr><tr><td><strong>return array length</strong></td><td><a href="#push">push()<br>unshift()</a></td><td></td></tr><tr><td><strong>return item's</strong> <strong>index</strong></td><td></td><td><a href="#index" data-type="internal" data-id="#index">indexOf()<br>lastIndexOf()</a></td></tr><tr><td><strong>return boolean</strong></td><td></td><td><a href="#every" data-type="internal" data-id="#every">every()<br>some()</a></td></tr><tr><td><strong>return the result</strong></td><td></td><td><a href="#reduce" data-type="internal" data-id="#reduce">reduce()<br>reduceRight()</a></td></tr></tbody></table></figure>
+<!-- /wp:flexible-table-block/table -->
+
+<!-- wp:html -->
+<p id="length"></p>
+<!-- /wp:html -->
+
+<!-- wp:more -->
+<!--more-->
+<!-- /wp:more -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">length|reverse()|splice()|sort()</h4>
+<!-- /wp:heading -->
+
+<!-- wp:html -->
+<a href="#table">backToTop</a>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p>The<strong> <em>length</em></strong> property of an array tells us how many elements are in that array. <em>We can use length to adjust the length of an array.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var num=[1,2,3,4,5];
+num.length=2;
+console.log(num);//[1,2]
+//or:
+num[num.length]=6;
+console.log(num);//[1,2,3,4,5,6]
+//or:
+num.length=6;
+console.log(num);//[1,2,3,4,5,(undefined item,index is 5)]</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>The <strong><em>reverse() </em></strong>method changes the order of the elements in an array. The first element becomes the last, and the last element becomes the first. This method modifies the original array and also returns a reference to the modified array.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var num=[1,2,3,4];
+num.reverse();
+console.log(num);//[4,3,2,1]</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>The&nbsp;<strong><em>splice()</em>&nbsp;</strong>method changes the contents of an array by removing or replacing existing elements and/or adding new elements.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var num=[1,2,6,3,8];
+var newnum=num.splice(1,3);//start, deleteCount
+console.log(newnum);//[2, 6, 3]
+console.log(num);//[1,8]
+//or:
+var num=[1,2,6,3,8];
+newnum=num.splice(0,1,1000,20000);
+console.log(num);//[1000, 20000, 2, 6, 3, 8]
+console.log(newnum);//[1],the deleted one</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>The <strong><em>sort()</em></strong> method sorts the elements of an array. It modifies the original array and returns a reference to the same array. By default, it sorts the elements in ascending order by converting them to strings and comparing their Unicode values.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var num=[11,2,15,4,5];
+var newnum=num.sort();
+console.log(newnum);//[11, 15, 2, 4, 5]
+//or:using compare function to get the right order
+function compare(num1,num2){
+			if(num1&gt;num2){return 1;}
+			else if(num1&lt;num2){return -1;}
+			else{return 0;}}
+var newnum=num.sort(compare);
+console.log(newnum);//[2, 4, 5, 11, 15]</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:html -->
+<p id="concat"></p>
+<!-- /wp:html -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">concat()|slice()|map()|filter()</h4>
+<!-- /wp:heading -->
+
+<!-- wp:html -->
+<a href="#table">backToTop</a>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p>The&nbsp;<strong><em>contact()</em></strong>&nbsp;method is used to merge two or more arrays.&nbsp;</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var num=[1,2,6,3,8];
+var newnum=num.concat(10,[20,5]);
+console.log(newnum);//[1, 2, 6, 3, 8, 10, 20, 5]</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>The<strong><em> slice()</em></strong> method creates a new array by copying a portion of an existing array. It selects the portion from the 'start' index up to, but not including, the 'end' index. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var num=[1,2,6,3,8];
+var newnum=num.slice(1,3);
+console.log(newnum);//[2, 6]</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>The <strong><em>map()</em></strong> method generates a new array by applying a function to every element in the original array. The new array is populated with the results of these function calls.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var num=[2,5,4,7,8,6];
+var mapresult=num.map(function(item,index,array){
+			return (item*4);
+});
+alert(mapresult);//[8,20,16,28,32,24]</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>The <strong><em>filter()</em></strong> method generates a new array containing a subset of elements from the original array. It only includes the elements that pass a test specified by a provided function.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var num=[2,5,4,7,8,6];
+var filterresult=num.filter(function(item,index,array){
+			return (item&gt;4);
+});
+alert(filterresult);//5,7,8,6</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:html -->
+<p id="pop"></p>
+<!-- /wp:html -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">pop()|shift()</h4>
+<!-- /wp:heading -->
+
+<!-- wp:html -->
+<a href="#table">backToTop</a>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p>The <strong><em>pop()</em></strong> method deletes the last element from an array and returns that element. This method modifies the length of the array.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var num=[1,2,3];
+var number=num.pop();
+console.log(number);//3,the last element
+console.log(num);//[1, 2]</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>The <strong><em>shift()</em></strong> method deletes the first element from an array and returns that element. This method modifies the length of the array.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var num=[1,2,3];
+var number=num.shift();//
+console.log(number);//1
+console.log(num);//[2,3]</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:html -->
+<p id="push"></p>
+<!-- /wp:html -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">push()|unshift()</h4>
+<!-- /wp:heading -->
+
+<!-- wp:html -->
+<a href="#table">backToTop</a>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p>The <strong><em>push()</em></strong> method appends one or more elements to the end of an array and returns the updated length of the array.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var num=[1,2,3];
+var length=num.push(-1,0);
+console.log(num);//[1, 2, 3, -1, 0]
+console.log(length);//5</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>The <strong><em>unshift() </em></strong>method prepends one or more elements to the beginning of an array and returns the updated length of the array.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var num=[1,2,3];
+var length=num.unshift(-1,0);
+console.log(num);//[-1, 0, 1, 2, 3]
+console.log(length);//5</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:html -->
+<p id="index"></p>
+<!-- /wp:html -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">indexOf()|lastIndexOf()</h4>
+<!-- /wp:heading -->
+
+<!-- wp:html -->
+<a href="#table">backToTop</a>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p>The <strong><em>indexOf()</em></strong> method returns the first index of a given element in the array. If the element is not found, it returns -1. If it is <strong><em>lastIndexOf()</em></strong>, The array is searched backwards, starting at&nbsp;fromIndex.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var words=[&quot;red&quot;,&quot;blue&quot;,&quot;yellow&quot;,&quot;black&quot;,&quot;blue&quot;,&quot;green&quot;];
+console.log(words.indexOf(&quot;blue&quot;));//1
+
+var words=[&quot;red&quot;,&quot;blue&quot;,&quot;yellow&quot;,&quot;black&quot;,&quot;blue&quot;,&quot;green&quot;];
+console.log(words.lastIndexOf(&quot;blue&quot;));//4
+
+console.log(words.indexOf(&quot;blue&quot;,3));//4,(searchElement, fromIndex)
+console.log(words.lastIndexOf(&quot;blue&quot;,3));//1,(searchElement, fromIndex)</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:html -->
+<p id="every"></p>
+<!-- /wp:html -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">every()|some()</h4>
+<!-- /wp:heading -->
+
+<!-- wp:html -->
+<a href="#table">backToTop</a>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p>The <strong><em>every()</em></strong> method checks if all elements in an array meet a certain condition specified by a provided function. It returns a Boolean value indicating whether all elements satisfy the condition.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var num=[2,5,4,7,8,6];
+var everyresult=num.every(function(item,index,array){
+			return (item&gt;4);
+});
+console.log(everyresult);//false</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>The <strong><em>some()</em></strong> method checks if at least one element in an array satisfies a condition specified by a provided function. If the function returns true for any element, the method returns true. If none of the elements satisfy the condition, it returns false.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"fileName":"JavaScript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var num=[2,5,4,7,8,6];
+var someresult=num.some(function(item,index,array){
+			return (item&gt;4);
+});
+alert(someresult);//true</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:html -->
+<p id="reduce"></p>
+<!-- /wp:html -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">reduce() | reduceRight() </h4>
+<!-- /wp:heading -->
+
+<!-- wp:html -->
+<a href="#table">backToTop</a>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p>The<strong><em> reduce() </em></strong>method applies a custom function to each element of an array, using the result from the previous element. It then returns a single value as the final result after applying the function to all elements.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var num=[1,2,6,3,8];
+var sum=num.reduce(function(prev,cur,index,array){
+			return prev+cur;//from the start of the array
+});
+		alert(sum);//20
+
+var num=[1,2,6,3,8];
+var sum=num.reduceRight(function(prev,cur,index,array){
+			return prev+cur;//from the end of the array
+});
+		alert(sum);//20</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Thank you for reading~</p>
+<!-- /wp:paragraph -->
