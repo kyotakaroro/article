@@ -1,0 +1,163 @@
+<!-- wp:html -->
+<p id="table"></p>
+<!-- /wp:html -->
+
+<!-- wp:flexible-table-block/table {"contentJustification":"center","className":"is-style-default"} -->
+<figure class="wp-block-flexible-table-block-table is-content-justification-center is-style-default"><table class="has-fixed-layout"><tbody><tr><td colspan="2" style="vertical-align:top;text-align:center;color:#55c3dc">String methods</td></tr><tr><td style="color:#352712"><strong>for changing content</strong></td><td><a href="#trim">trim()<br>replace()<br>toLocaleLowerCase()<br>toLocaleUpperCase()</a></td></tr><tr><td><strong><strong>String</strong> <strong>to</strong> <strong>Array</strong></strong></td><td><a href="#split">split()</a></td></tr><tr><td><strong>for searching</strong></td><td><a href="#match">match()<br>search()</a></td></tr><tr><td><strong>for comparing</strong></td><td><a href="#localecompare">localeCompare()</a></td></tr><tr><td><strong>Array</strong> <strong>to</strong> <strong>String</strong></td><td><a href="#join">join()</a></td></tr></tbody></table></figure>
+<!-- /wp:flexible-table-block/table -->
+
+<!-- wp:html -->
+<p id="trim"></p>
+<!-- /wp:html -->
+
+<!-- wp:more -->
+<!--more-->
+<!-- /wp:more -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">trim()|replace()|toLocaleLowerCase()|toLocaleUpperCase()</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><a href="#table">backToTop</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <strong><em>trim() </em></strong>function eliminates any extra space at the beginning or end of a string and provides a new string.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var words=&quot;  hello world  &quot;;
+var changedwords=words.trim();
+console.log(changedwords);//&quot;hello world&quot;</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>The <strong><em>replace()</em></strong> function lets you make a new string by swapping out one, some, or all matches of a pattern. You can use a string or a special kind of expression called a RegExp as the pattern, and you can use a string or a function to create the new string. If you use a string as the pattern, only the first occurrence will be swapped out. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var words=&quot;cat,bat,rat&quot;;
+var pattern=/at/g;//g:globle.if there're no 'g',only the first occurrence will be swapped out.
+var replaced=words.replace(pattern,&quot;ond&quot;);
+console.log(replaced);//cond,bond,rond
+//or:
+var replaced=words.replace(/(.at)/g,words($1));//&quot;words(cat),words(bat),words(rat)&quot;
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>The <strong><em>toLocaleLower/UpperCase()</em></strong> function converts the string to lowercase/uppercase.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var words=&quot;hello world&quot;;
+console.log(words.toLocaleLowerCase());//&quot;hello world&quot;
+console.log(words.toLocaleUpperCase());//&quot;HELLO WORLD&quot;</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:html -->
+<p id="split"></p>
+<!-- /wp:html -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">split()</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><a href="#table">backToTop</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <strong><em>split()</em></strong> function divides a string into smaller pieces based on a specific pattern you provide. Then it puts them into an array, in the order they appear in the original string.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"fileName":"javaScript","mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var words=&quot;cat,bat,rat&quot;;
+var newwords=words.split(&quot;,&quot;);//separate string based on&quot;,&quot;
+console.log(newwords);//[ 'cat', 'bat', 'rat' ]</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:html -->
+<p id="match"></p>
+<!-- /wp:html -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">match()|search()</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><a href="#table">backToTop</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <strong><em>match()</em></strong> function finds and returns the parts of a string that match a regular expression you provide.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The<strong><em> search()</em></strong> function looks for a particular pattern, which is a regular expression. It then returns the position of the first occurrence of the pattern in the string.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"fileName":"javaScript","mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var words=&quot;cat,bat,rat&quot;;
+var pattern=/.at/;
+var matchedwords=words.match(pattern);
+console.log(matchedwords);//cat
+var searchedwords=words.search(pattern);
+console.log(searchedwords);//0,返回第一次出现的位置</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:html -->
+<p id="localecompare"></p>
+<!-- /wp:html -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">localeCompare()</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><a href="#table">backToTop</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The<strong><em> localeCompare() </em></strong>function compares two strings and returns a number to indicate if the first string comes before, after, or is the same as the second string when they are sorted alphabetically based on language-specific rules.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var words=&quot;cat&quot;;
+console.log(words.localeCompare(&quot;rat&quot;));//-1, cat is before rat
+console.log(words.localeCompare(&quot;bat&quot;));//1， cat is after bat.if it's same, it'll be 0</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:html -->
+<p id="join"></p>
+<!-- /wp:html -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">join()</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><a href="#table">backToTop</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The<strong><em> join() </em></strong>function merges all the elements in an array or similar object into a single string. You can choose to separate the elements with a comma or use any other string as the separator. If there is only one item in the array, it will return that item without using any separator.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var num=[1,2,3];
+alert(num.join(&quot;||&quot;));//&quot;1||2||3&quot;</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Thank you for Reading!</p>
+<!-- /wp:paragraph -->
