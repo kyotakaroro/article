@@ -1,0 +1,239 @@
+<!-- wp:group {"layout":{"type":"flex","orientation":"vertical","justifyContent":"center","verticalAlignment":"top"}} -->
+<div class="wp-block-group"><!-- wp:table-of-contents {"headings":[{"content":"what is the scope?","level":2,"link":"https://www.frontend-cheese.website/homepage/?p=133#what-is-scope"},{"content":"Global scope","level":4,"link":"https://www.frontend-cheese.website/homepage/?p=133#global-scope"},{"content":"Function scope","level":4,"link":"https://www.frontend-cheese.website/homepage/?p=133#function-scope"},{"content":"Block scope","level":4,"link":"https://www.frontend-cheese.website/homepage/?p=133#block-scope"},{"content":"what is the closure?","level":2,"link":"https://www.frontend-cheese.website/homepage/?p=133#what-is-closure"},{"content":"Why do we need it?","level":4,"link":"https://www.frontend-cheese.website/homepage/?p=133#why-do-we-need-it"}],"textColor":"dark-purple","fontSize":"medium"} -->
+<nav class="wp-block-table-of-contents has-dark-purple-color has-text-color has-medium-font-size"><ol><li><a class="wp-block-table-of-contents__entry" href="https://www.frontend-cheese.website/homepage/?p=133#what-is-scope">what is the scope?</a><ol><li><a class="wp-block-table-of-contents__entry" href="https://www.frontend-cheese.website/homepage/?p=133#global-scope">Global scope</a></li><li><a class="wp-block-table-of-contents__entry" href="https://www.frontend-cheese.website/homepage/?p=133#function-scope">Function scope</a></li><li><a class="wp-block-table-of-contents__entry" href="https://www.frontend-cheese.website/homepage/?p=133#block-scope">Block scope</a></li></ol></li><li><a class="wp-block-table-of-contents__entry" href="https://www.frontend-cheese.website/homepage/?p=133#what-is-closure">what is the closure?</a><ol><li><a class="wp-block-table-of-contents__entry" href="https://www.frontend-cheese.website/homepage/?p=133#why-do-we-need-it">Why do we need it?</a></li></ol></li></ol></nav>
+<!-- /wp:table-of-contents --></div>
+<!-- /wp:group -->
+
+<!-- wp:heading {"anchor":"what-is-scope"} -->
+<h2 class="wp-block-heading" id="what-is-scope">what is the scope?</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Scope means where variables are accessible within a program. It depends on where they are created and how they are linked to functions and blocks.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"medium"} -->
+<p class="has-medium-font-size"><em>why do we need scope?</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>It helps to prevent naming conflicts and ensures that variables and functions are only accessible where they are needed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:more -->
+<!--more-->
+<!-- /wp:more -->
+
+<!-- wp:heading {"level":4,"anchor":"global-scope"} -->
+<h4 class="wp-block-heading" id="global-scope">Global scope</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Global scope means a variable or function can be accessed and modified from anywhere in a program. However, using global variables and functions excessively can make code harder to manage, so it's important to use them carefully.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>function foo(a){
+  console.log(a+b);}
+var b=2;
+foo(2);//4</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>The variable b is in the global scope, and the function foo receives the parameter 2 with a=2. Although b is not in the scope of the function, because the function scope is nested within the global scope, the engine will look for b in the outer scope until it reaches the outermost scope.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"medium"} -->
+<p class="has-medium-font-size"><em>ReferenceError and TypeErro</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In strict mode, when a variable is undeclared and cannot be found by the engine, it will prompt a <em>ReferenceError</em>.If the variable can be found, but the operation on its value is not valid, a <em>TypeError</em> will occur.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4,"anchor":"function-scope"} -->
+<h4 class="wp-block-heading" id="function-scope">Function scope</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Function scope refers to all variables belonging to a function that can be used within the scope of that function.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>function foo(a){
+var b=2;
+ var c=3;
+  function bar(){
+    console.log(a,b,c);
+  }
+  bar();
+}
+
+foo(2);&gt;//2 2 3
+console.log(a,b,c);//Error: a is not defined</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>function doSomething(a){
+ b=a+doSomethingElse(a*2);
+ function doSomethingElse(a){
+    return a-1;
+ }
+ var b;
+ console.log(b*3);
+}
+doSomething(2)//15</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>One principle of software design is to expose only necessary content to a minimum extent. In the above example, we wrote the declaration of the function doSomethingElse and the variable b inside the function to "privatize" them, which can prevent variable conflicts.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Furthermore, in order to avoid polluting the current scope, it is possible to call a function without using the "function name+()" format. For example:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(function foo(){
+    var a=3;
+    console.log(a);
+})();//3</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>If you want to pass a variable from the global scope into a parameter, you can do it like this:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"fileName":"javaScript\u003cbr\u003e(function foo(global){\u003cbr\u003evar a=3;\u003cbr\u003econsole.log(a);\u003cbr\u003econsole.log(global.a)\u003cbr\u003e})(window);\u003cbr\u003evar a=1;JavaScript","mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(function foo(global){
+    var a=3;
+    console.log(a);//3
+    console.log(global.a);//1
+})(window);
+var a=1;
+
+//OR
+(function foo(def){
+    def( window );
+})(function def(global){
+    var a=3;
+    console.log(a);
+    console.log(global.a);})
+var a=1;</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>Or you can call it IIFE.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4,"anchor":"block-scope"} -->
+<h4 class="wp-block-heading" id="block-scope">Block scope</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Block scope means that variables and functions that are defined within a block of code (like inside a function or loop) can only be accessed within that block of code. They cannot be used outside of it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"fileName":"const a=4;\u003cbr\u003eif(a\u0026lt;5){\u003cbr\u003e\u003ccode\u003econsole.log(\u0022smaller than 5\u0022);\u003c/code\u003e\u003cbr\u003evar b=5;\u003cbr\u003e}\u003cbr\u003econsole.log(b);JavaScript","mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>let a=4;
+if(a&lt;5){
+    console.log(&quot;smaller than 5&quot;);//smaller than 5
+   var b=5;
+}
+console.log(b);//5
+
+let a=4;
+if(a&lt;5){
+    console.log(&quot;smaller than 5&quot;);
+   let b=5;
+}
+console.log(b);//Error: b is not defined</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>In block scope, a variable declared with var can be accessed in the global scope, while a variable declared with let cannot. However, variables declared in the function scope, whether with let or var, cannot be accessed outside the function.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"anchor":"what-is-closure"} -->
+<h2 class="wp-block-heading" id="what-is-closure">what is the closure?</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Closure is when a function can use variables that are outside of its own scope. This is because the function remembers the variables from its parent scope when it was created, even if they are no longer accessible when the function runs. Closures can be used to make private variables and callback functions and modules.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4,"anchor":"why-do-we-need-it"} -->
+<h4 class="wp-block-heading" id="why-do-we-need-it"><em>Why do we need it?</em></h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><em>Closures can remember the state of a function even after it has finished running.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>function foo(){
+    var a=2;
+    function func(){
+        console.log(a);
+    }
+    return func;
+}
+var newfunc=foo();
+newfunc();</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>The value returned by the function foo is func, which is assigned to the variable newfunc. When we call newfunc, we also call the func() inside the foo(). In other words, we are calling the func() inside the function foo through the new identifier newfunc.  </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>foo() will not be garbage collected, and func can continue to reference the variable "a" declared inside foo(). This type of reference is called a closure.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>Closures can help divide code into smaller pieces, making it easier to manage and expand.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>function module(){
+    var text=&quot;hello&quot;;
+    var arr=[1,2,3];
+    function doSomething(){
+        console.log(text);
+    }
+    function doSomethingElse(){
+        console.log(arr.join(&quot;|&quot;));
+    }
+    return {
+        func1:doSomething,
+        func2:doSomethingElse
+    }
+}
+var newfunc=module();
+newfunc.func1();//hello
+newfunc.func2();//1|2|3</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p><em>Closures can be used to make code wait before running or to run code in the background.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"fileName":"try it!","mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>for(var i=1;i&lt;5;i++){
+    (function(j){
+        setTimeout(
+            function timer(){
+                console.log(j);
+            },j*1000
+        )
+    })(i);
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"medium"} -->
+<p class="has-medium-font-size">Thanks for your reading~</p>
+<!-- /wp:paragraph -->
