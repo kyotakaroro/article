@@ -1,0 +1,288 @@
+<!-- wp:group {"layout":{"type":"constrained"}} -->
+<div class="wp-block-group"><!-- wp:table-of-contents {"headings":[{"content":"What is 'this' and why do we need it?","level":3,"link":"https://www.frontend-cheese.website/homepage/?p=156#what-is-this-and-why-do-we-need-it"},{"content":"How to use 'this'?","level":3,"link":"https://www.frontend-cheese.website/homepage/?p=156#how-to-use-this"},{"content":"Default Binding","level":4,"link":"https://www.frontend-cheese.website/homepage/?p=156#default-binding"},{"content":"Implicit Binding","level":4,"link":"https://www.frontend-cheese.website/homepage/?p=156#implicit-binding"},{"content":"Explicit Binding","level":4,"link":"https://www.frontend-cheese.website/homepage/?p=156#explicit-binding"},{"content":"New Binding","level":4,"link":"https://www.frontend-cheese.website/homepage/?p=156#new-binding"},{"content":"Pay attention to the priority","level":3,"link":"https://www.frontend-cheese.website/homepage/?p=156#pay-attention-to-the-priority"}]} -->
+<nav class="wp-block-table-of-contents"><ol><li><a class="wp-block-table-of-contents__entry" href="https://www.frontend-cheese.website/homepage/?p=156#what-is-this-and-why-do-we-need-it">What is 'this' and why do we need it?</a></li><li><a class="wp-block-table-of-contents__entry" href="https://www.frontend-cheese.website/homepage/?p=156#how-to-use-this">How to use 'this'?</a><ol><li><a class="wp-block-table-of-contents__entry" href="https://www.frontend-cheese.website/homepage/?p=156#default-binding">Default Binding</a></li><li><a class="wp-block-table-of-contents__entry" href="https://www.frontend-cheese.website/homepage/?p=156#implicit-binding">Implicit Binding</a></li><li><a class="wp-block-table-of-contents__entry" href="https://www.frontend-cheese.website/homepage/?p=156#explicit-binding">Explicit Binding</a></li><li><a class="wp-block-table-of-contents__entry" href="https://www.frontend-cheese.website/homepage/?p=156#new-binding">New Binding</a></li></ol></li><li><a class="wp-block-table-of-contents__entry" href="https://www.frontend-cheese.website/homepage/?p=156#pay-attention-to-the-priority">Pay attention to the priority</a></li></ol></nav>
+<!-- /wp:table-of-contents --></div>
+<!-- /wp:group -->
+
+<!-- wp:heading {"level":3,"anchor":"what-is-this-and-why-do-we-need-it"} -->
+<h3 class="wp-block-heading" id="what-is-this-and-why-do-we-need-it">What is 'this' and why do we need it?</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>"this" refers to the context object of the executing function or the current execution environment. To better understand this abstract concept, we can use a more common and easy-to-understand example: building with blocks.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"align":"right","width":193,"height":193,"sizeSlug":"large","style":{"color":{}},"className":"is-style-rounded"} -->
+<figure class="wp-block-image alignright size-large is-resized is-style-rounded"><img src="https://img.ixintu.com/download/jpg/201912/efd3f230cf2c9b71415142efcb549de1.jpg!con" alt="" width="193" height="193"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Suppose we need to build something with blocks.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>We have a box of blocks with blocks of various colors, and we have a set of instructions that say:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol><!-- wp:list-item -->
+<li>Put the red block on top of the yellow block.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Put the green block on top of the red block.</li>
+<!-- /wp:list-item --></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The box of blocks is equivalent to the global scope, and the instructions are equivalent to functions, and these two instructions are equivalent to the two pieces of code inside the function.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:more -->
+<!--more-->
+<!-- /wp:more -->
+
+<!-- wp:paragraph -->
+<p>Following the first instruction, we need to find the red and yellow blocks. We have to look for them in the box of blocks, which is the context object. At this point, "this" points to the global scope.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Following the second instruction, we need to find the red block before we can add the green block on top. At this point, the red block is the context object, and "this" points to it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In conclusion, "this" is a very important concept in JavaScript and plays a crucial role. Understanding the principles and "usage" of "this" can help write clearer and more maintainable code.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3,"anchor":"how-to-use-this"} -->
+<h3 class="wp-block-heading" id="how-to-use-this">How to use 'this'?</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>We can get acquainted with 'this' through some examples.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:group {"layout":{"type":"constrained"}} -->
+<div class="wp-block-group"><!-- wp:paragraph -->
+<p>But before that, to facilitate an understanding of 'this', we need to first understand '<em>call()</em>'. Please see the following example:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"fileName":"JavaScript","mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>function Product(name, price) {
+  this.name = name;
+  this.price = price;
+}
+
+function Food(name, price) {
+  Product.call(this, name, price);
+  this.category = 'food';
+}
+
+console.log(new Food('cheese', 5).category);// food
+var cheese = new Food('cheese', 5);
+console.dir(cheese);//Food { name: 'cheese', price: 5, category: 'food' }</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:group {"layout":{"type":"constrained"}} -->
+<div class="wp-block-group"><!-- wp:paragraph -->
+<p><strong>'call()'</strong> is a method of a function object that allows you to call a function in a specific scope. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Syntax</strong>: <em>function.call(thisArg, arg1, arg2, ...)</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Explanation</strong>: </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>'function' </em>is the function object to be called.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p> <em>'thisArg</em>' specifies the scope in which the function is executed (i.e., the value of "this"). If no scope needs to be specified, null or undefined can be passed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em> 'arg1, arg2, ...'</em> are the optional list of arguments to be passed to the function.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Another concept you need to understand before understanding "this" is the concept of <strong>call site </strong>and<strong> call stack</strong>. Let's take a look at the following example:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"fileName":"JavaScript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>function baz(){// call stack: baz
+    console.log(&quot;baz&quot;);
+    bar(); // call site of bar
+}
+function bar(){// call stack：baz-&gt;bar
+    console.log(&quot;bar&quot;);
+    foo(); // call site of foo
+}
+function foo(){// call stack：baz-&gt;bar-&gt;foo
+    console.log(&quot;foo&quot;);// Its call site is in bar now.
+}
+baz();//baz bar foo</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>Call site refers to the location in code where a function is called, and it can tell us what "this" refers to.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Call stack is a mechanism used to keep track of function calls and records the position of the functions currently being executed in the program.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>When a function is called, it is added to the top of the call stack. In the example above, the call sequence is baz -&gt; bar -&gt; foo, so the call stack is baz -&gt; bar -&gt; foo, with baz at the bottom and foo at the top. The function at the bottom of the stack is executed first, and the function at the top is executed last. After execution, the function is removed from the stack, with the removal order being opposite to the call sequence, i.e., following the "last in, first out" principle.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Now that we have covered these concepts, we can finally take a closer look at "this".</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:paragraph {"align":"center"} -->
+<p class="has-text-align-center">We use 4 binding rules to use "this".</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4,"anchor":"default-binding"} -->
+<h4 class="wp-block-heading" id="default-binding">Default Binding</h4>
+<!-- /wp:heading -->
+
+<!-- wp:codemirror-blocks/code-block {"fileName":"JavaScript","mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>const name = &quot;John&quot;;
+
+function greet() {
+  console.log(`Hi, my name is ${this.name}.`);
+}
+
+greet(); // Hi, my name is John.
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>The default binding refers to when a function is called independently, the "this" keyword will be bound to the global object (usually the window object in a browser) by default.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In the above example, we defined a global variable "name" and a function "greet". When we directly call the "greet" function, because it is called independently, the "this" keyword will be bound to the global object by default. Therefore, in the "greet" function, we can use "this.name" to access the global variable "name". When we call "greet()", the output will show "Hi, my name is John.".</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Note that when using default binding, if the function is called in strict mode, the "this" keyword will not be bound to the global object by default, but will remain undefined.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4,"anchor":"implicit-binding"} -->
+<h4 class="wp-block-heading" id="implicit-binding">Implicit Binding</h4>
+<!-- /wp:heading -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>const person = {
+  name: &quot;John&quot;,
+  age: 30,
+  greet: function() {
+    console.log(`Hi, my name is ${this.name}. I'm ${this.age} years old.`);
+  }
+};
+
+person.greet(); // Hi, my name is John. I'm 30 years old.
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>When a function is called as an object's method, the "this" keyword in the function will be implicitly bound to that object.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In the above example, the "greet" method is called as the method of the "person" object. Therefore, in the "greet" method, the "this" keyword will be implicitly bound to the "person" object. In the "greet" method, we can use "this.name" and "this.age" to access the properties of the "person" object. When we call "person.greet()", the output will show "Hi, my name is John. I'm 30 years old.".</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4,"anchor":"explicit-binding"} -->
+<h4 class="wp-block-heading" id="explicit-binding">Explicit Binding</h4>
+<!-- /wp:heading -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>const person = {
+  name: &quot;John&quot;,
+  age: 30,
+  greet: function() {
+    console.log(`Hi, my name is ${this.name}. I'm ${this.age} years old.`);
+  }
+};
+
+const anotherPerson = {
+  name: &quot;Alice&quot;,
+  age: 25
+};
+
+
+person.greet.call(anotherPerson); // Hi, my name is Alice. I'm 25 years old.
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>We can use the call, apply, or bind methods to explicitly bind the "this" keyword.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In the above example, we defined a "person" object and another "anotherPerson" object. We used the call method to explicitly bind the "this" keyword in the "person.greet" method to the "anotherPerson" object. Therefore, in the "greet" method, we use "this.name" and "this.age" to access the properties of the "anotherPerson" object. When we call "person.greet.call(anotherPerson)", the output will show "Hi, my name is Alice. I'm 25 years old.".</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4,"anchor":"new-binding"} -->
+<h4 class="wp-block-heading" id="new-binding">New Binding</h4>
+<!-- /wp:heading -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.greet = function() {
+    console.log(`Hi, my name is ${this.name}. I'm ${this.age} years old.`);
+  }
+}
+
+const person = new Person(&quot;John&quot;, 30);
+
+person.greet(); // Hi, my name is John. I'm 30 years old.
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>When a function is called with the new keyword, a new object is created and bound to 'this' inside the function.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In the example above, we define a constructor function Person that takes two arguments, name and age. When we call the Person function with the new keyword, a new object is created and bound to 'this' inside the Person function. As a result, we can use this.name and this.age to set the properties of the Person object. In the Person function, we also define a greet method that prints the values of the Person object's properties. When we call person.greet(), the output will be 'Hi, my name is John. I'm 30 years old'.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3,"anchor":"pay-attention-to-the-priority"} -->
+<h3 class="wp-block-heading" id="pay-attention-to-the-priority"><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-dark-gray-color">Pay attention to the priority</mark></h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>It's important to note that there may be multiple binding methods in a code, and the priority order of the four binding methods is:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>New Binding: When a function is called with the new keyword, 'this' inside the function is bound to the newly created object.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Explicit Binding: When the call, apply, or bind method is used to explicitly bind 'this' inside the function to a specified object.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Implicit Binding: When a function is called as a method of an object, 'this' inside the function is implicitly bound to that object.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Default Binding: When a function is called independently, 'this' inside the function is implicitly bound to the global object (usually the window object in a browser).</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In summary, in JavaScript, this is a special keyword that represents the context object in which the current function is executed. The value of this is automatically set when a function is called, depending on the way the function is called.</p>
+<!-- /wp:paragraph -->
