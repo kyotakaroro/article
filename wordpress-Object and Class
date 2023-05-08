@@ -1,0 +1,430 @@
+Object
+
+Why is it necessary to understand object
+
+In JavaScript, objects are a crucial concept because almost everything can be seen as an object, such as functions, arrays, dates, and regular expressions. Therefore, if you want to truly master JavaScript, you must understand objects.
+
+Objects are a very flexible data type that can be dynamically extended, modified, and passed around. This flexibility makes JavaScript objects an ideal choice for writing complex applications and interactive web pages. If you can understand objects well, you can write better code, and improve code maintainability, scalability, and efficiency.
+
+Moreover, understanding the concept of objects can also help you better manipulate the DOM and thus perform web development more effectively. Therefore, learning JavaScript objects is essential.
+
+How to create object
+
+Objects can be defined in two ways: literal form and constructor form.
+
+//textual form
+var str="string";
+console.log(typeof str);//string，the engine will automatically convert it to a String object when necessary.
+console.log(str instanceof String);//false
+console.log(str.length);//6
+//constructive form
+var strobj=new String("string");//"String" is a built-in function.
+console.log(typeof strobj);//object
+console.log(strobj instanceof String);//true
+console.log(strobj);//[String: 'string']
+console.log(String(strobj));//string
+console.log(strobj.length);//6
+
+Although both forms can create objects, we typically use the literal form to create objects and only use the constructor form when we need to add additional options. Similarly, we usually use the literal form when working with built-in objects.
+
+var myobj={};
+myobj[true]="hello";
+myobj[3]="number";
+myobj[myobj]="love";
+
+console.log(myobj["true"]);//hello
+console.log(myobj["3"]);//number
+console.log(myobj["[object Object]"]);//love
+
+The property name of an object is always a string, even if a value other than a string is used as the property name, it will be converted to a string.
+
+ES6 introduced computed property names.
+
+var pre="first";
+var obj={
+    [pre+"House"]:"isBig",
+    [pre+"Pet"]:"isCat"
+}
+console.log(obj[pre+"House"]);//"isBig"
+console.log(obj[pre+"Pet"]);//"isCat"
+
+How to duplicate an object?
+
+Object.assign(target, …sources)
+
+function anotherFunction(){
+    console.log("hello");
+}
+var anotherObj={
+    c:true
+};
+var anotherArr=[];
+
+var myobj={
+    a:2,
+    b:anotherObj,
+    c:anotherArr,
+    d:anotherFunction
+}
+
+var newObj=Object.assign({},myobj);
+console.log(newObj);
+
+How to determine if a property exists in an object
+
+var myobj={
+    a:2
+};
+console.log(myobj.hasOwnProperty("a"));//true
+console.log(myobj.hasOwnProperty("b"));//false
+
+Or you can use 'in'
+
+console.log("a" in myobj);//true
+console.log("b" in myobj);//false
+
+What is the difference?
+
+"hasOwnProperty" is an object method used to check if an object has a property with the specified name. The "in" operator, on the other hand, is used to check if an object or its prototype chain has a property. This means that even if the property is inherited from the prototype chain, it will still return true.
+
+You can understand it through the following example.
+
+let obj = { x: 1 };
+let protoObj = { y: 2 };
+Object.setPrototypeOf(obj, protoObj);
+console.log(obj.hasOwnProperty('x')); // true
+console.log(obj.hasOwnProperty('y')); // false
+console.dir(obj);//{ x: 1 }
+console.dir(protoObj);//{ y: 2 }
+console.log('x' in obj); // true
+console.log('y' in obj); // true
+
+Object property descriptors
+
+var myobj={
+    a:2
+};
+console.log( Object.getOwnPropertyDescriptor(myobj,"a"));
+//Object { value: 2, writable: true, enumerable: true, configurable: true }
+
+In Object { value: 2, writable: true, enumerable: true, configurable: true }, in addition to the value 2, there are three attributes: writable, enumerable, and configurable. These three attributes are set to true by default, but you can modify them using Object.defineProperty().
+
+var myObj={};
+Object.defineProperty(myObj,"a",{
+    value:2,
+    writable:false,
+    configurable:true,
+    enumerable:true
+});
+myObj.a=3;
+console.log(myObj.a);//2
+
+After setting the writable to false, the value of this property cannot be modified.
+
+var myObj={};
+Object.defineProperty(myObj,"a",{
+    value:2,
+    writable:true,
+    configurable:false,
+    enumerable:true
+});
+delete myObj.a;
+console.log(myObj.a);//2
+Object.defineProperty(myObj,"a",{
+    configurable:true,
+});
+
+delete myObj.a;
+console.log(myObj.a);//error
+
+Once the configurable option is set to false, the value cannot be deleted and the option cannot be changed back to true.
+
+const obj = {
+    name: 'John',
+    age: 30,
+    getFullName() {
+      return this.name;
+    }
+  };
+  Object.defineProperty(obj, 'name', { enumerable: false });
+  Object.defineProperty(obj, 'age', { enumerable: false });
+
+  for (let prop in obj) {
+    console.log(prop);
+  }// getFullName
+
+  Object.defineProperty(obj, 'age', { enumerable: true });
+
+    for (let prop in obj) {
+    console.log(prop);
+  }// age  getFullName
+
+When enumerable is set to false, the property will not appear in the object's property enumeration. If you want it to appear in the enumeration, you can set it back to true.
+
+How to prohibit extensible properties, seal properties, and freeze properties.
+
+Object.preventExtensions() prevents an object from adding new properties while retaining existing properties.
+
+var myObj={
+    a:2
+};
+Object.preventExtensions(myObj);
+myObj.b=3;
+console.log(myObj.b);//undefined
+
+Calling Object.seal() on an object will invoke Object.preventExtensions() on that object and set the configurable to false. But you can still modify the value of the attribute.
+
+const obj = {
+  name: "John",
+  age: 30
+};
+
+Object.seal(obj);
+
+obj.age = 31;
+console.log(obj.age); // Output: 31
+
+obj.gender = "male"; // This assignment will be ignored
+console.log(obj.gender); // Output: undefined
+
+Object.freeze() will invoke Object.seal() on the object and set the writable to false.
+
+const obj = {
+  name: "John",
+  age: 30
+};
+
+Object.freeze(obj);
+
+obj.age = 31; // This assignment will be ignored in strict mode
+console.log(obj.age); // Output: 30
+
+obj.gender = "male"; // This assignment will be ignored in non-strict mode
+console.log(obj.gender); // Output: undefined
+
+Getter and setter
+
+In JavaScript, getter and setter are a type of property accessor that allows custom code to be executed when getting and setting object properties.
+
+A getter is a function used to retrieve the value of a property. When the property is accessed, the getter is called and returns the value. Conversely, a setter is a function used to set the value of a property. When the property is set, the setter is called and passed the new value as a parameter.
+
+const person = {
+  _age: 25,
+  get age() {
+    return this._age;
+  },
+  set age(newAge) {
+    if (newAge < 0) {
+      throw new Error('Age cannot be negative');
+    }
+    this._age = newAge;
+  }
+};
+person.age = 30; 
+console.log(person.age); // 30
+
+How to traverse object
+
+Before that, we need to understand symbol.iterator and next(). Let's first look at the following example:
+
+var randoms={
+    [Symbol.iterator]:function(){
+        return {
+            next:function(){
+                return {
+                    value:Math.random() };} }; }}
+var random_nums=[];
+        for(var x of randoms){
+            random_nums.push(x);
+            if(random_nums.length===100)break;
+        }
+        console.log(random_nums);
+
+symbol.iterator is a built-in Symbol property that defines an iterator object, which can be used to iterate through the elements in an iterable object. The next() method is a method on the iterator object that returns an object containing value and done properties each time it is called, where value represents the current element being iterated and done indicates whether the iteration has been completed.
+
+In summary, symbol.iterator is used to create an iterator object, while the next() method is used to traverse the iterator object by continually calling it to retrieve the next element until the iteration is complete.
+
+But we cannot use symbol.iterator on the object.
+
+So this is how we do:
+
+var myobj={
+    a:2,
+    b:3
+};
+Object.defineProperty(myobj,Symbol.iterator,{
+    enumerable:false,
+    writable:false,
+    configurable:true,
+    value:function(){
+        var obj=this;//Refer to the object currently being traversed=》myobj. 
+        var idx=0;//Record which numbered property of the object is currently being traversed
+        var ks=Object.keys(obj);//Retrieve an array of the property names，["a", "b"]
+        return {
+            next:function(){
+                return {
+                    value:obj[ks[idx++]],
+                    done:(idx>ks.length)
+                };
+            }
+        }
+    }
+})
+var iter=myobj[Symbol.iterator]();
+console.log(iter.next());//{ value: 2, done: false }
+console.log(iter.next());//{ value: 3, done: false }
+console.log(iter.next());//{ value: undefined, done: true }
+
+for(var x of myobj){
+    console.log(x);
+}
+//2
+//3
+
+In this code, an attribute named Symbol.iterator is added to the object myobj by using the Object.defineProperty method and assigned a function that returns an iterator object. This makes the object myobj an iterable object. When a for…of loop iterates over this object, it automatically calls the next() method of the iterator object to retrieve the value of the next element until the iteration is complete.
+
+Class
+
+Understanding Classes and Instances through an Example:
+
+class Animal {
+  constructor(name, species) {
+    this.name = name;
+    this.species = species;
+  }
+
+  getDetails() {
+    return `${this.name} is a ${this.species}.`;
+  }
+}
+
+let myPet = new Animal("Max", "dog");
+console.log(myPet.getDetails()); //"Max is a dog."
+
+This example defines a class named "Animal" which has two properties, "name" and "species", as well as a method named "getDetails()" that returns a string describing the animal's name and species. Then, an instance object of the Animal class called "myPet" is created using the "new" keyword, and the "getDetails()" method is called to output the detailed information of this instance.
+
+The constructor is a special method in a JavaScript class that is automatically called when a new object is created, and used to initialize the object's properties and methods. When we create an instance of the Animal class using the "new" keyword, the JavaScript engine automatically calls the constructor method and passes the arguments("Max", "dog") given to the constructor function as parameters.
+
+Therefore, a class is a blueprint or template for creating objects, while an instance is a concrete object created by the class. The relationship between a class and an instance is similar to that between a blueprint and an actual building. The blueprint describes the properties and structure of the building, while the building itself is a concrete object created based on these blueprints.
+
+Inheritance, polymorphism and mixins of class
+
+Inheritance
+
+// Parent class Animal
+class Animal {
+    constructor(name) {
+      this.name = name;
+    }
+  
+    eat() {
+      console.log(`${this.name} is eating.`);
+    }
+  }
+  // Child class Dog extends from Animal
+  class Dog extends Animal {
+    constructor(name, breed) {
+      super(name); // Call the constructor inherited from parent class
+      this.breed = breed;
+    }
+  
+    bark() {
+      console.log(`${this.name} is barking. Breed: ${this.breed}`);
+    }
+  }
+  // Create an instance object of Dog class called myDog
+const myDog = new Dog("Buddy", "Labrador");
+// Call the eat() method inherited from parent class Animal
+myDog.eat();
+// Call the bark() method of the child class Dog
+myDog.bark();
+
+In the above example, we defined a parent class Animal with a constructor and an eat() method. Then we defined a subclass Dog, which inherited the Animal class by using the extends keyword. The Dog class also has a constructor and a bark() method, which are both unique to the subclass.
+
+We called the parent class Animal's constructor by invoking super(name) within the Dog class's constructor and passing the name parameter provided to the Dog class to it. This allows us to use the parent class's properties and methods within the Dog class.
+
+Finally, we created an instance object of the Dog class named myDog, called the inherited eat() method from the parent class Animal, and the unique bark() method of the Dog subclass, and outputted the details of myDog.
+
+polymorphism
+
+Polymorphism is an important concept in object-oriented programming that allows for the definition of common behaviors and attributes in a parent class, and their implementation in different ways in the child classes, enabling objects of different types to be handled using the same interface. In the following example, different types of shapes (rectangles and circles) have their own methods for calculating their areas, but they both implement the calculateArea() method of the Shape class, allowing them to be treated as instances of the Shape class.
+
+class Shape {
+    calculateArea() {
+        throw new Error("Method 'calculateArea()' must be implemented.");
+    }
+  }
+  
+  class Rectangle extends Shape {
+    constructor(width, height) {
+      super();
+      this.width = width;
+      this.height = height;
+    }
+  
+    calculateArea() {
+        return this.width * this.height;
+      }
+  }
+  
+  class Circle extends Shape {
+    constructor(radius) {
+      super();
+      this.radius = radius;
+    }
+  
+    calculateArea() {
+      return Math.PI * Math.pow(this.radius, 2);
+    }
+  }
+  
+  let shapes = [new Rectangle(3,4), new Circle(2)];
+  shapes.forEach((shape) => console.log(shape.calculateArea()));
+
+In the above example, we defined a method called calculateArea() in the parent class Shape, and if it is not implemented in the child class, the program will throw an "Error: Method 'calculateArea()' must be implemented." This design allows us to quickly identify problems in the code. You can try deleting calculateArea() in the child class and see what happens.
+
+super() is used to call the constructor of the parent class so that the child class can inherit the properties and methods of the parent class. In JavaScript, if a subclass wants to inherit the constructor of its parent class, it must use super() to call the constructor of the parent class.
+
+In the constructor of the child class, super() must be called before the child class uses the this keyword. This is because, in JavaScript, the subclass must call super() first in order to access the properties and methods of the parent class. If you try to use the this keyword before calling super(), it will raise a ReferenceError.
+
+Finally, we create an array called shapes containing Rectangle and Circle objects and use the forEach() iterator to iterate through the array and call the calculateArea() method of each object.
+
+mixins
+
+Mixin is a technique of extending the functionality of a class by merging the properties and methods of one or more objects into it. These mixin objects typically contain some common, reusable code that can be mixed into multiple classes to avoid code duplication and increase code reusability.
+
+// Define a common method that can be mixed into other classes
+const mixin = {
+  sayHello() {
+    console.log('Hello!');
+  },
+  sayGoodbye() {
+    console.log('Goodbye!');
+  }
+};
+// Define a class
+class MyClass {
+  constructor(name) {
+    this.name = name;
+  }
+  greet() {
+    console.log(`Hello, my name is ${this.name}.`);
+  }
+}
+// Mix in the common methods to MyClass
+Object.assign(MyClass.prototype, mixin);
+// Create a MyClass instance and call its methods
+const myObj = new MyClass('John');
+myObj.greet(); //"Hello, my name is John."
+myObj.sayHello(); //"Hello!"
+myObj.sayGoodbye(); //"Goodbye!"
+
+In the above example, we defined an object named "mixin" that contains two methods: "sayHello" and "sayGoodbye". We wanted to mix these generic methods into the "MyClass" class so that they could be called on instances of MyClass.
+
+To mix the "mixin" into MyClass, we used the "Object.assign()" method, which copies the properties of the "mixin" object onto MyClass.prototype. This means that all instances of MyClass will inherit the methods from "mixin".
+
+Finally, we created an instance of MyClass named "myObj" and called its "greet" method as well as the "sayHello" and "sayGoodbye" methods from "mixin" to demonstrate that they all work correctly.
+
+Epilogue
+
+In summary, both objects and classes are core concepts in JavaScript, and understanding them can help us write code that is easier to maintain and more concise. We can deepen our understanding of them through practical application.
